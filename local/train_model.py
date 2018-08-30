@@ -17,7 +17,7 @@ for filename in os.listdir('/images/Train/'):
 X = np.array(X, dtype=float)
 
 # Set up train and test data
-split = int(0.95 * len(X))
+split = int(0.9 * len(X))
 Xtrain = X[:split]
 Xtrain = 1.0 / 255 * Xtrain
 
@@ -61,7 +61,7 @@ def image_a_b_gen(batch_size):
 
 # Train model
 tensorboard = TensorBoard(log_dir="/output/beta_run")
-model.fit_generator(image_a_b_gen(batch_size), callbacks=[tensorboard], epochs=3000)
+model.fit_generator(image_a_b_gen(batch_size), callbacks=[tensorboard], steps_per_epoch=900, epochs=100)
 
 # Save model
 model_json = model.to_json()
